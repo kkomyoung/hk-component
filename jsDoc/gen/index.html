@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.flatly.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Accordion.html">Accordion</a></li><li><a href="DropdownSelect.html">DropdownSelect</a></li><li><a href="Expand.html">Expand</a></li><li><a href="HKSwiper.html">HKSwiper</a></li><li><a href="Input.html">Input</a></li><li><a href="Popup.html">Popup</a></li><li><a href="PopupAlertImpl.html">PopupAlertImpl</a></li><li><a href="PopupDate.html">PopupDate</a></li><li><a href="PopupExternal.html">PopupExternal</a></li><li><a href="PopupSelect.html">PopupSelect</a></li><li><a href="Tab.html">Tab</a></li><li><a href="Tooltip.html">Tooltip</a></li><li><a href="UI.html">UI</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#getAlertLayerTmpl">getAlertLayerTmpl</a></li><li><a href="global.html#getBottomLayerTmpl">getBottomLayerTmpl</a></li><li><a href="global.html#getDropDownTmpl">getDropDownTmpl</a></li><li><a href="global.html#getInputButtonClose">getInputButtonClose</a></li><li><a href="global.html#getVideoSimpleLayerTmpl">getVideoSimpleLayerTmpl</a></li><li><a href="global.html#scrollTo">scrollTo</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>흥국화재 스크립트 가이드</h1>
+<p><strong>문서내의 링크의 경우 기본 url이 http://localhost:8888로 되어있음. 서버에서 해당내용을 볼 경우 변경바랍니다.</strong></p>
+<h2>#UI</h2>
+<h3>role</h3>
+<ul>
+<li>기획, 디자인에서 발생하는 기본 html UI를 사용할 수 없는 경우 커스텀 UI를 제공한다.</li>
+<li>개발이 없는 정적인 페이지는 퍼블리싱, ui스크립터가 작업한다.</li>
+<li>개발과 섞인 동적인 ui는 ui스크립터가 작업하고 사용방법을 제공해준다.</li>
+<li>공통ui는 별도의 페이지에서 예제를 제공하고 각 페이지에 독립적으로 들어가는 ui는 페이지내에서 예제를 제공한다.
+(각 예제는 단순 예제일뿐 사용의도에 맞게 id변경등이 필요할수있다.)</li>
+<li>개발친화적인 ui는 제공하지 않는다.(금액에 콤마 찍어주는 등 벨리데이션과 관련된 요소는 제외)</li>
+<li>벨리데이션은 개발 프로세스의 이해가 필요하므로 ui스크립터가 작업하지 않는다.</li>
+<li>모든 스크립트는 ui구조가 정해져 있으므로 임의로 요소를 수정하지 않고 퍼블리셔 pl 또는 ui스크립터와 상의 한다.</li>
+</ul>
+<h3>정의</h3>
+<ul>
+<li>모든 스크립트 폼요소를 제외한 ui는 ui-xxx 클래스를 갖는다.
+(예: ui-accordion, ui-tab, ui-popup 등등)</li>
+<li>모든 ui는 페이지 로드시 기본 호출이 되어있고</li>
+<li>해당 ui를 재호출 할수있다.</li>
+<li>아래와 같이 호출하면 해당 ui의 정보를 확인할수 있고 제공된 메소드를 호출할수 있다.
+(메소드는 제공된것만 사용하고 이외의 것을 사용할일이 있으면 ui스크립터와 상의한다.)</li>
+</ul>
+<pre class="prettyprint source lang-html"><code>&lt;!-- html -->
+&lt;div class=&quot;popup-group&quot;>
+    &lt;div class=&quot;dimm&quot;>&lt;/div>
+    &lt;div class=&quot;popup-dialog ui-popup ui-full&quot; id=&quot;full-popup-01&quot;>
+        &lt;!-- 팝업내용 -->
+    &lt;/div>
+&lt;/div>
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// js
+$('#full-popup-01').data('ui')
+</code></pre>
+<ul>
+<li>모든 ui는 옵션을 가질 수 있으며 옵션은 해당 요소의 data-xx로 값을 넣는다.</li>
+<li>아래 예제의 경우 tab의 기본 보이는 index가 1일 경우 아래처럼 처리함을 보여준다.</li>
+</ul>
+<pre class="prettyprint source lang-html"><code>&lt;!-- html -->
+&lt;div class=&quot;tab-nav-container ui-tab&quot; data-no=&quot;1&quot;>
+    &lt;!-- 탭내용 -->
+&lt;/div>
+</code></pre>
+<h3>요소의 변경과 값 입력</h3>
+<p>ui스크립트는 기본 jquery를 사용하여 제작되었고 vue, react처럼 돔전체를 관리하진 않으므로
+페이지 로드시점 이후 동적으로 요소를 조작하거나 값을 입력시 .update()를 호출하여 요소를 업데이트 해주거나
+값을 입력하고 화면에 반영해주려면 업데이트를 해줘야한다
+(jquery val(), prop(), attr()값을 넣어줄경우는 제외 jquery hook으로 자동 업데이트됨)</p>
+<pre class="prettyprint source lang-javascript"><code>  // ui스크립트 외부에서 돔조작
+  $('#some-ui').data('ui').update();    // 필수 호출
+</code></pre>
+<hr>
+<hr>
+<h2>UI의 초기화</h2>
+<ul>
+<li>기본적으로 페이지가 로드될때 해당요소가 있으면 자동으로 초기화 된다.</li>
+<li>하지만 동적으로 컨텐츠가 들어오고 나서 ui의 추가적인 초기화가 필요할때 아래와 같이 처리한다.</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>  hkUI.refreshUI()  // 새로들어온 요소중에 초기화할 ui 초기화
+  hkUI.refreshUI(true)  // [비추천]기존에 로드된 ui까지 모두 초기화
+</code></pre>
+<hr>
+<hr>
+<h2>팝업</h2>
+<h3>정의</h3>
+<h4>종류</h4>
+<ul>
+<li>[정적]풀 팝업(.ui-full)
+<ul>
+<li>높이가 100%인 컨텐츠를 모두 덮는 팝업</li>
+</ul>
+</li>
+<li>[정적]심플 팝업(.ui-simple)
+<ul>
+<li>높이가 100%가 아닌 딤드와 컨텐츠가 보이는 팝업</li>
+</ul>
+</li>
+<li>[정적]보톰 팝업(.ui-bottom)
+<ul>
+<li>하단에서 올라오는 팝업</li>
+</ul>
+</li>
+<li>[동적]셀렉트 보톰팝업(.ui-bottom)
+<ul>
+<li>보톰 팝업과 룩은 같지만 기존 select요소 기능을 하는 팝업</li>
+</ul>
+</li>
+<li>[동적]동영상 팝업(.ui-video)
+<ul>
+<li>동영상 단독으로 보이는 팝업</li>
+</ul>
+</li>
+<li>[동적]날짜 팝업(.ui-bottom)
+<ul>
+<li>보톰 팝업과 같으나 내용이 datepicker</li>
+</ul>
+</li>
+<li>[동적]앨럿 팝업
+<ul>
+<li>네이티브 alert, confirm을 대채하는 팝업</li>
+</ul>
+</li>
+</ul>
+<h4>동적생성과 정적생성</h4>
+<ul>
+<li>각페이지에서 생성이 번거로운 셀렉트 보톰팝업과 앨럿팝업은 동정생성되므로 사용법에 맞게 사용하면되고 풀팝업, 심플팝업, 보톰팝업은 기본적으로 퍼블리싱되어 해당요소에 위치하게 되어있고 스크립트는 열고 닫고만
+제공한다. 각 팝업에 맞는 개발을 한 후 열고 닫으면 된다.</li>
+</ul>
+<h4>팝업 종류에 맞게 클래스 사용</h4>
+<ul>
+<li>모든 팝업은 ui-popup클래스가 붙으며 종류에 따른 클래스가 붙는다.</li>
+<li>풀팝업: ui-full, 심플팝업: ui-simple, 보톰팝업: ui-bottom, 앨럿팝업: ui-alert</li>
+</ul>
+<h4>팝업 요소의 위치</h4>
+<ul>
+<li>html &gt; body &gt; #wrap &gt; .popup-group</li>
+<li>팝업은 모두 해당 요소에 위치해야하고 다른곳에 있을 수 없다.</li>
+</ul>
+<h4>dimm의 사용</h4>
+<ul>
+<li>딤드는 따로 개발에서 호출하지 않고 ui스크립트에서 관리한다.</li>
+<li>중첩 팝업일 경우 dimm한개로 관리해야하므로 ui스크립트에서 관리</li>
+</ul>
+<h3>예제</h3>
+<h4>풀팝업</h4>
+<p><a href="http://localhost:8888/html/prototype/prototype_popup_full.html">예제</a></p>
+<pre class="prettyprint source lang-javascript"><code>// 팝업 열고 닫기(html/prototype/prototype_popup_full.html)
+// 퍼블리싱 페이지에서 정의된 id는 예제일뿐 의미에 맞는 id를 재부여한다.
+$('#full-popup-01').data('ui').open();
+$('#full-popup-01').data('ui').close();
+
+// 기본 닫기 기능 외에 바로 닫으면 안되는 경우일 때
+$('#full-popup-01').data('ui').beforeCloseCallback(function(){
+    if(confirm('닫으시겠습니까?')){
+      $('#full-popup-01').data('ui').close();
+    }
+})
+
+// popup-content 에 padding-bottom 값이 제대로 나오지 않는 경우
+$('#full-popup-01').data('ui').changePaddingBottom();
+</code></pre>
+<h4>심플팝업</h4>
+<p><a href="http://localhost:8888/html/prototype/prototype_popup_simple.html">예제</a></p>
+<pre class="prettyprint source lang-javascript"><code>// 팝업 열고 닫기(html/prototype/prototype_popup_simple.html)
+$('#layer-popup-01').data('ui').open();
+$('#layer-popup-01').data('ui').close();
+
+// 기본 닫기 기능 외에 바로 닫으면 안되는 경우일 때
+$('#layer-popup-01').data('ui').beforeCloseCallback(function(){
+  if(confirm('닫으시겠습니까?')){
+    $('#layer-popup-01').data('ui').close();
+  }
+})
+</code></pre>
+<h4>보톰팝업</h4>
+<p>4종류가 존재한다.</p>
+<ul>
+<li>data-type=&quot;normal&quot; =&gt; 동적생성되지 않는 팝업</li>
+<li>data-type=&quot;select&quot; =&gt; 동적생성 기존 select ui 대체</li>
+<li>data-type=&quot;bank&quot; =&gt; select유사하지만 은행리스트가 뿌려짐</li>
+<li>data-type=&quot;card&quot; =&gt; select유사하지만 카드사리스트가 뿌려짐</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>// 팝업 열고 닫기(html/prototype/prototype_popup_normal.html)
+$('#bottom-popup-01').data('ui').open();
+$('#bottom-popup-01').data('ui').close();
+
+// 기본 닫기 기능 외에 바로 닫으면 안되는 경우일 때
+$('#bottom-popup-01').data('ui').beforeCloseCallback(function(){
+  if(confirm('닫으시겠습니까?')){
+    $('#bottom-popup-01').data('ui').close();
+  }
+})
+</code></pre>
+<h4>셀렉트 보톰팝업</h4>
+<p><a href="http://localhost:8888/html/prototype/prototype_popup_select.html">예제</a></p>
+<h4>옵션</h4>
+<h5>종류</h5>
+<ul>
+<li><strong>data-optional</strong>
+<ul>
+<li>false(default) : 필수 선택(ex: value1, value2, value3)</li>
+<li>true : 선택적 선택(ex: 선택, value1, value2, value3)</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint source lang-html"><code>&lt;div class=&quot;input-wrap in-message&quot;>
+  &lt;div class=&quot;tit&quot;>상담유형&lt;/div>
+  &lt;div class=&quot;input-txt select&quot;>
+    &lt;select aria-hidden=&quot;true&quot;>&lt;!-- 필수 -->
+    &lt;select aria-hidden=&quot;true&quot; data-optional=&quot;true&quot;>&lt;!-- 선택 -->
+      &lt;option value=&quot;&quot;>선택&lt;/option>  &lt;!-- 선택 옵션 필수!! -->
+      &lt;option value=&quot;1&quot;>1&lt;/option>
+      &lt;option value=&quot;2&quot;>2&lt;/option>
+      &lt;option value=&quot;3&quot;>3&lt;/option>
+      &lt;option value=&quot;4&quot;>4&lt;/option>
+      &lt;option value=&quot;5&quot;>5&lt;/option>
+      &lt;option value=&quot;6&quot;>6&lt;/option>
+      &lt;option value=&quot;7&quot;>7&lt;/option>
+    &lt;/select>
+    &lt;button type=&quot;button&quot;>&lt;!-- select가 비활성일때 button에 disabled -->
+      &lt;span>선택하세요&lt;/span>
+    &lt;/button>
+  &lt;/div>
+  &lt;div class=&quot;message-wrap&quot;>
+    &lt;div class=&quot;message&quot;>상담유형을 입력해주세요&lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// 셀렉트 보톰팝업 콜백(html/prototype/prototype_popup_select.html)
+$('#select-01').data('ui').callback(function(data){
+    //=> {index: 3, value: &quot;3&quot;, text: &quot;3&quot;, img: undefined, el: option}
+    console.log(data);
+})
+
+// 열고 닫기
+$('#select-01').data('ui').open()
+$('#select-01').data('ui').close()
+
+// 동적으로 option이 들어왔을때 update호출
+$('#select-01').html(''+
+    '&lt;option value=&quot;&quot;>선택&lt;/option>&lt;!-- 선택 필수 -->'+
+    '&lt;option value=&quot;codeSi01&quot;>서울시&lt;/option>'+
+    '&lt;option value=&quot;codeSi02&quot;>인천시&lt;/option>'+
+    '&lt;option value=&quot;codeSi03&quot;>수원시&lt;/option>'+
+    '&lt;option value=&quot;codeSi04&quot;>부산시&lt;/option>'+
+'');
+$('#select-01').update();
+
+// 값 넣기
+$('#select-01').val('codeSi03');
+
+// 선택된 option인덱스 얻기
+$('#select-01').data('ui').datas
+//=> {selectedIndex: 3, list: Array(5)}
+$('#select-01')[0].selectedIndex    // 가능
+
+// 선택 안한 값으로 변경
+$('#select-01').val('');
+</code></pre>
+<h4>날짜팝업</h4>
+<p>아래와 같은 구조로 넣을 경우 날짜 입력이 가능하다.
+날짜 라이브러리는 jquery ui를 사용하고 추가 옵셥을 넣을시 update를 활용한다.(아래 예제)</p>
+<p><a href="http://localhost:8888/html/prototype/prototype_popup_date.html">예제</a></p>
+<pre class="prettyprint source lang-html"><code>&lt;div class=&quot;input-wrap in-message done&quot;>
+  &lt;label class=&quot;tit&quot; for=&quot;acc-date&quot;>사고일&lt;/label>
+  &lt;div class=&quot;input-txt date-picker&quot;>
+    &lt;input class=&quot;ui-date&quot; type=&quot;text&quot; id=&quot;acc-date&quot; placeholder=&quot;사고일을 입력해 주세요&quot; readonly=&quot;true&quot; value=&quot;2020-04-25&quot; data-title=&quot;사고일 입력&quot;>
+    &lt;button class=&quot;btn_cal&quot; type=&quot;button&quot;>&lt;/button>
+  &lt;/div>
+  &lt;div class=&quot;message-wrap&quot;>
+    &lt;div class=&quot;message&quot;>사고일을 입력해 주세요.&lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// ui가 초기화 되고(common.ui.js로드 완료) 아래 함수에 jquery ui datepicker추가 옵션을 넣는다.
+$('#acc-date').data('ui').setOption({
+  minDate: '2021-04-03' // 추가 옵션
+});
+</code></pre>
+<h4>앨럿팝업</h4>
+<p><a href="http://localhost:8888/html/prototype/prototype_popup_alert.html">예제</a></p>
+<pre class="prettyprint source lang-javascript"><code>hkUI.alert.open({
+    header: '제목',   // 선택
+    content: '컨텐츠', // 필수
+    btnCancel: {      // 선택
+        text: 'cancel', // 선택(기본값: 취소)
+        fn: function(){
+            // callback
+            console.log(1);
+        }
+    },
+    btnConfirm: {     // 선택
+        text: 'ok', // 선택(기본값: 확인)
+        fn: function(){
+            // callback
+            console.log(2);
+        }
+    }
+});
+
+// ex) 컨텐츠와 확인버튼만 있고 버튼명이 확인일경우
+hkUI.alert.open({
+  content: '컨텐츠', // 필수
+  btnConfirm: {     // 선택
+    fn: function(){
+      // callback
+      console.log(2);
+    }
+  }
+});
+</code></pre>
+<hr>
+<hr>
+<h2>드롭박스</h2>
+<ul>
+<li>셀렉트 보톰 팝업과 사용법 같음</li>
+</ul>
+<h4>옵션</h4>
+<p>data-type=&quot;dropdown&quot;</p>
+<p><a href="http://localhost:8888/html/prototype/prototype_form2.html#dropbox">예제</a></p>
+<hr>
+<hr>
+<h2>폼요소</h2>
+<h3>개요</h3>
+<ul>
+<li>input-wrap 감싸여진 1덩어리는 1벨리데이션을 갖는다.</li>
+<li>라벨(타이틀)이 최초, 포커스시 표현되지 않고 입력(선택)된 후 나타나게 된다.</li>
+<li>디자인에 따라 라벨(타이틀)이 표현되지 않는곳이 있다.()</li>
+</ul>
+<h3>벨리데이션처리(에러)</h3>
+<ul>
+<li>input-wrap클래스에 error클래스 추가</li>
+</ul>
+<h3>접근성 처리</h3>
+<p>서브밋시 벨리데이션처리 후 <strong>에러가 발생시</strong> 아래 코드를 호출 해줘야 접근성 준수를 할수 있음.</p>
+<pre class="prettyprint source lang-javascript"><code>hkUI.a11yValidateError()
+</code></pre>
+<h3>값의 입력</h3>
+<pre class="prettyprint source lang-javascript"><code>// jQuery를 이용한 값 입력val, prop, attr은 update를 호출하지 않아도 됨
+$('#input').val('some text');
+
+// javascript 사용시 각 ui사용법에 맞게 update() 호출
+document.querySelector('#input').value = 'some text';
+$('.input-wrap').data('ui').update();
+</code></pre>
+<h3>보안키패드</h3>
+<p>보안키패드일때 하단 CTA버튼과 간섭이 일어남으로 인해<br>
+보안키패드가 열리고 닫을때 아래 스크립트를 호출 해야함.</p>
+<pre class="prettyprint source lang-javascript"><code>// 보안키패드가 열릴때
+hkUI.setFixedCTA(false)
+// 보안키패드를 닫을때
+hkUI.setFixedCTA(true) 
+</code></pre>
+<hr>
+<hr>
+<h2>툴팁(개발요소 없음)</h2>
+<h3>정의</h3>
+<h4>필수 클래스</h4>
+<ul>
+<li>.ui-tooltip</li>
+</ul>
+<h3>예시</h3>
+<p><a href="http://localhost:8888/html/prototype/prototype_list.html#list-contents">예제</a></p>
+<pre class="prettyprint source lang-html"><code>&lt;div>
+  텍스트
+  &lt;!-- start: 툴팁 -->
+  &lt;div class=&quot;tooltip-wrap ui-tooltip&quot;>&lt;!-- ui-tooltip -->
+    &lt;button class=&quot;tooltip-btn&quot; type=&quot;button&quot; title=&quot;제목&quot; aria-expanded=&quot;false&quot;>툴팁&lt;/button>
+    &lt;div class=&quot;tooltip-page&quot;>
+      &lt;div class=&quot;tooltip-box&quot;>
+        &lt;div class=&quot;tooltip-header&quot;>
+          &lt;h3>&lt;!-- 툴팁제목 -->&lt;/h3>
+        &lt;/div>
+        &lt;div class=&quot;tooltip-content scrollbar-outer&quot;>
+          &lt;!-- 툴팁내용 -->
+        &lt;/div>
+        &lt;button class=&quot;tooltip-close&quot; type=&quot;button&quot;>
+          &lt;span class=&quot;hide-txt&quot;>툴팁 닫기&lt;/span>
+          &lt;i class=&quot;ico-style close&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+        &lt;/button>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+  &lt;!-- end: 툴팁 -->
+&lt;div>
+
+</code></pre>
+<hr>
+<hr>
+<h2>넛지(개발 호출 ui 없음)</h2>
+<p>.popup-toast이 있으면 해당 내용이 페이지 초기에 나왔다가 사라짐</p>
+<p><a href="http://localhost:8888/html/product/insr/cari/01/cpdis0101_m01.html">예제</a></p>
+<pre class="prettyprint source lang-html"><code>&lt;div id=&quot;nudge&quot;>
+  &lt;div class=&quot;nudge_content&quot;>
+    &lt;div class=&quot;quick-nudge&quot;>
+      &lt;div class=&quot;dimm&quot;>&lt;/div>
+      &lt;ol class=&quot;list&quot;>
+        &lt;li class=&quot;save&quot;>
+          &lt;div class=&quot;name&quot;>계산결과 저장&lt;/div>
+          &lt;button type=&quot;button&quot;>&lt;/button>
+        &lt;/li>
+        &lt;li class=&quot;sms&quot;>
+          &lt;div class=&quot;name&quot;>SMS 전송&lt;/div>
+          &lt;button type=&quot;button&quot;>&lt;/button>
+        &lt;/li>
+        &lt;li class=&quot;call&quot;>
+          &lt;div class=&quot;name&quot;>전화상담&lt;/div>
+          &lt;button type=&quot;button&quot;>&lt;/button>
+        &lt;/li>
+      &lt;/ol>
+      &lt;button class=&quot;btn-plus&quot; type=&quot;button&quot; title=&quot;도움말&quot;>
+        &lt;i class=&quot;ico-bar&quot;>&lt;/i>
+      &lt;/button>
+      &lt;div class=&quot;popup-toast&quot;>
+        &lt;div class=&quot;popup-inner&quot;>
+          &lt;div class=&quot;txt-help&quot;>STEP2. 보험료계산에서의 계산결과를 저장하거나 SMS로 전송할 수 있어요!&lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+&lt;/div>
+</code></pre>
+<hr>
+<hr>
+<h2>확장</h2>
+<h3>정의</h3>
+<h4>필수 클래스</h4>
+<ul>
+<li>.ui-expand : 부모요소</li>
+<li>.ui-expand-btn : 버튼요소</li>
+</ul>
+<h4>옵션</h4>
+<h5>종류</h5>
+<ul>
+<li><strong>data-scroll</strong>
+<ul>
+<li>true: 확장된 영역을 기준으로 스크롤이 이동됨</li>
+<li>false: 스크롤이동 없음</li>
+</ul>
+</li>
+</ul>
+<h5>디폴트 옵션</h5>
+<ul>
+<li>data-scroll=&quot;false&quot;</li>
+</ul>
+<h3>예시</h3>
+<p><a href="http://localhost:8888/html/prototype/prototype_contents.html#expand">예제</a></p>
+<h5>기본 구조</h5>
+<pre class="prettyprint source lang-html"><code>
+&lt;div class=&quot;folding-wrap-tp01 ui-expand&quot;>
+  &lt;div class=&quot;notice-wrap&quot;>
+    &lt;dl>
+      &lt;dt>주의사항&lt;/dt>
+      &lt;dd>
+        &lt;button class=&quot;btn-act ui-expand-btn&quot; type=&quot;button&quot; title=&quot;주의사항&quot; aria-expanded=&quot;false&quot;>
+          &lt;span class=&quot;hide-txt&quot;>더보기&lt;/span>
+          &lt;i class=&quot;ico-arrow-style bottom&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+        &lt;/button>
+        &lt;div class=&quot;notice-list&quot;>
+          &lt;ul>
+            &lt;li>텍스트&lt;/li>
+          &lt;/ul>
+        &lt;/div>
+      &lt;/dd>
+    &lt;/dl>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+<hr>
+<hr>
+<h2>아코디언</h2>
+<h3>정의</h3>
+<h4>필수 클래스</h4>
+<ul>
+<li>.ui-accordion</li>
+<li>.ui-accordion-list</li>
+<li>.ui-accordion-btn</li>
+</ul>
+<h4>옵션</h4>
+<h5>종류</h5>
+<ul>
+<li><strong>data-type</strong>
+<ul>
+<li>single : 한개씩만 열고 닫을 때</li>
+<li>multi : 개별적으로 열고 닫을 때</li>
+</ul>
+</li>
+<li><strong>data-state</strong>
+<ul>
+<li>allOpen : 초기 전체 열림</li>
+</ul>
+</li>
+<li><strong>data-no</strong>
+<ul>
+<li>자연수 (예: 1) : 1번째 요소만 열림</li>
+<li>자연수 나열 (예: 1,3,4) : 1,3,4번째 리스트 열림</li>
+</ul>
+</li>
+<li><strong>data-scroll</strong>
+<ul>
+<li>true : 활성화된 .ui-accordion-list 를 기준으로 스크롤이 이동됨</li>
+<li>false : 스크롤 이동 없음</li>
+</ul>
+</li>
+</ul>
+<h5>디폴트 옵션</h5>
+<ul>
+<li>data-type=&quot;single&quot; data-state=&quot;allOpen&quot; data-scroll=&quot;false&quot;</li>
+</ul>
+<h3>예시</h3>
+<p><a href="http://localhost:8888/html/prototype/prototype_list.html#accordion">예제</a></p>
+<h5>기본 구조</h5>
+<pre class="prettyprint source lang-html"><code>
+&lt;div id=&quot;accordion-01&quot; class=&quot;list-wrap-tp01 ui-accordion&quot;>&lt;!-- ui-accordion -->
+    &lt;ul class=&quot;list-accordion&quot;>
+        &lt;li class=&quot;ui-accordion-list&quot;>&lt;!-- ui-accordion-list -->
+            &lt;a class=&quot;tit-area ui-accordion-btn&quot; role=&quot;button&quot;>&lt;!-- ui-accordion-btn -->
+                &lt;span class=&quot;icon&quot;>1&lt;/span>
+                &lt;p>자동차 사고접수&lt;span class=&quot;hide-txt&quot;>접기&lt;/span>
+                    &lt;i class=&quot;ico-arrow-style bottom&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+                &lt;/p>
+            &lt;/a>
+            &lt;div class=&quot;cont-area&quot;>
+                &lt;ol>
+                    &lt;li>1. 사고접수&lt;/li>
+                    &lt;li>2. 사고상담&lt;/li>
+                    &lt;li>3. 기존 사고 접수 진행 사항/담당자 자동안내 조회&lt;/li>
+                &lt;/ol>
+            &lt;/div>
+        &lt;/li>
+        &lt;li class=&quot;ui-accordion-list&quot;>&lt;!-- ui-accordion-list -->
+            &lt;a class=&quot;tit-area ui-accordion-btn&quot; role=&quot;button&quot;>&lt;!-- ui-accordion-btn -->
+                &lt;span class=&quot;icon&quot;>2&lt;/span>
+                &lt;p>자동차 고장 긴급출동&lt;span class=&quot;hide-txt&quot;>펼치기&lt;/span>
+                    &lt;i class=&quot;ico-arrow-style bottom&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+                &lt;/p>
+            &lt;/a>
+            &lt;div class=&quot;cont-area&quot;>내용 없음&lt;/div>
+        &lt;/li>
+    &lt;/ul>
+&lt;/div>
+</code></pre>
+<h5>옵션을 변경해야하는 경우</h5>
+<ul>
+<li>ui-accordion 클래스가 있는 태그에 data-type, data-state, data-no, data-scroll를 기능에 맞게 넣는다.</li>
+</ul>
+<pre class="prettyprint source lang-html"><code>&lt;!-- 예시 1 -->
+&lt;div id=&quot;accordion-02&quot; class=&quot;ui-accordion&quot; data-type=&quot;multi&quot; data-no=&quot;1&quot;>
+  &lt;!-- 생략 -->
+&lt;/div>
+
+&lt;!-- 예시 2 -->
+&lt;div id=&quot;accordion-03&quot;  class=&quot;ui-accordion&quot; data-state=&quot;allOpen&quot; data-scroll=&quot;true&quot;>
+  &lt;!-- 생략 -->
+&lt;/div>
+
+&lt;!-- 예시 3 -->
+&lt;div id=&quot;accordion-04&quot;  class=&quot;ui-accordion&quot; data-type=&quot;multi&quot; data-no=&quot;2, 3, 4, 5&quot; data-scroll=&quot;true&quot;>
+  &lt;!-- 생략 -->
+&lt;/div>
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>// js
+
+
+// 리스트 열기
+  // 전체 열림
+  $('#accordion-01').data('ui').open('all');
+
+  // 2번째 ui-accordion-list만 열림
+  $('#accordion-01').data('ui').open(2);
+  $('#accordion-01').data('ui').open('2');
+
+  // 3, 5번째 ui-accordion-list만 열림
+  $('#accordion-01').data('ui').open(&quot;3, 5&quot;);
+
+
+// 리스트 닫기
+  // 전체 닫힘
+  $('#accordion-01').data('ui').close('all');
+</code></pre>
+<hr>
+<hr>
+<h2>스와이퍼</h2>
+<h3>정의</h3>
+<h4>필수 클래스</h4>
+<ul>
+<li>.ui-swiper</li>
+</ul>
+<h4>옵션</h4>
+<h5>종류</h5>
+<ul>
+<li><strong>data-no</strong>
+<ul>
+<li>0을 포함한 자연수 : initialSlide 초기값 설정</li>
+</ul>
+</li>
+<li><strong>data-nav</strong>
+<ul>
+<li>true : 화살표 네비게이션 버튼 사용</li>
+<li>false : 사용안함</li>
+</ul>
+</li>
+<li><strong>data-paging</strong>
+<ul>
+<li>true : 페이지네이션 사용</li>
+<li>false : 사용안함</li>
+</ul>
+</li>
+<li><strong>data-paging-type</strong>
+<ul>
+<li>fraction : 숫자 타입 페이지네이션 사용</li>
+<li>undefined : 사용안함</li>
+</ul>
+</li>
+<li><strong>data-paging-title</strong>
+<ul>
+<li>텍스트 : 페이지네이션의 제목</li>
+<li>undefined : 사용안함</li>
+</ul>
+</li>
+<li><strong>data-slides-per-view</strong>
+<ul>
+<li>auto : 한번에 보여줄 슬라이드 갯수 자동 설정</li>
+<li>자연수 : 한번에 보여줄 슬라이드 갯수</li>
+</ul>
+</li>
+<li><strong>data-space-between</strong>
+<ul>
+<li>0을 포함한 자연수 : 슬라이드 사이 여백 값 (px 기준)</li>
+</ul>
+</li>
+</ul>
+<h5>디폴트 옵션</h5>
+<ul>
+<li>data-no=&quot;0&quot; data-nav=&quot;false&quot; data-paging=&quot;false&quot; data-paging-type=&quot;undefined&quot; data-paging-title=&quot;undefined&quot; data-slides-per-view=&quot;auto&quot; data-space-between=&quot;20&quot;</li>
+</ul>
+<h3>예시</h3>
+<p><a href="http://localhost:8888/html/prototype/prototype_slide.html">예제</a></p>
+<h5>기본 구조</h5>
+<pre class="prettyprint source lang-html"><code>&lt;div class=&quot;swiper-section ui-swiper&quot;>
+  &lt;div class=&quot;swiper-container&quot;>
+    &lt;div class=&quot;swiper-wrapper&quot;>
+      &lt;div class=&quot;swiper-slide&quot;>
+        &lt;div>컨텐츠&lt;/div>
+      &lt;/div>
+      &lt;div class=&quot;swiper-slide&quot;>
+        &lt;div>컨텐츠&lt;/div>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+<h5>옵션을 변경해야하는 경우</h5>
+<ul>
+<li>ui-swiper 클래스가 있는 태그에 옵션을 기능에 맞게 넣는다.</li>
+</ul>
+<pre class="prettyprint source lang-html"><code>&lt;div class=&quot;swiper-section ui-swiper&quot; data-nav=&quot;true&quot; data-paging=&quot;true&quot;>
+  &lt;div class=&quot;swiper-container&quot;>
+    &lt;div class=&quot;swiper-wrapper&quot;>
+      &lt;div class=&quot;swiper-slide&quot;>
+        &lt;div>컨텐츠&lt;/div>
+      &lt;/div>
+      &lt;div class=&quot;swiper-slide&quot;>
+        &lt;div>컨텐츠&lt;/div>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+<hr>
+<hr>
+<h2>헤더</h2>
+<pre class="prettyprint source lang-html"><code>&lt;header id=&quot;header&quot;>
+  &lt;ul class=&quot;skipnav&quot;>
+    &lt;li>
+      &lt;a href=&quot;#content&quot;>컨텐츠 바로가기&lt;/a>
+    &lt;/li>
+  &lt;/ul>
+  &lt;div class=&quot;header-content&quot;>
+    &lt;h1>흥국화재&lt;/h1>
+    &lt;button class=&quot;ico-area-tp01 prev&quot; type=&quot;button&quot;>
+      &lt;span class=&quot;hide-txt&quot;>이전페이지&lt;/span>
+      &lt;i class=&quot;ico-back&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+    &lt;/button>
+    &lt;button class=&quot;ico-area-tp01 menu&quot; type=&quot;button&quot;>
+      &lt;span class=&quot;hide-txt&quot;>전체메뉴&lt;/span>
+      &lt;i class=&quot;ico-menu&quot; aria-hidden=&quot;true&quot;>&lt;/i>
+    &lt;/button>
+  &lt;/div>
+&lt;/header>
+</code></pre>
+<h3>뒤로가기</h3>
+<p><strong>개발요청에 의해작성됨</strong></p>
+<ul>
+<li>단순 기능만 ui스크립트에서 제공하고 상세한 기능은 개발에서 구현해야함</li>
+<li>뒤로가기 클릭시 기본기능은 history.back();호출</li>
+<li>history.back()이 아닐시 콜백 호출</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>$('#header').data('ui').btnPrevCallback(function(){
+    // 뒤로가기 처리
+});
+</code></pre>
+<h3>스크롤 시 해더 스타일 변화</h3>
+<ul>
+<li>'#header'에 product 또는 transparent 클래스가 추가 된 후 아래 함수 실행</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>hkUI.fixedHeader()
+</code></pre>
+<hr>
+<hr>
+<h2>룰렛</h2>
+<p><a href="http://localhost:8888/html/life/ipnt/chlpo0203_m03.html">페이지</a></p>
+<pre class="prettyprint source lang-javascript"><code>/*
+   0: 비타500
+   1: 10P+
+   2: 당첨
+   3: 비타500
+   4: 10P+
+   5: 당첨
+* */
+$('.ui-roulette').data('ui').setRotate(0)   // 0 ~ 5
+
+// example
+$('.go-btn').on('click', function(e){
+    $.ajax({
+      ...,
+      onComplete: function(data){
+        $('.ui-roulette').data('ui').setRotate(data)
+      }
+    })
+});
+</code></pre>
+<hr>
+<hr>
+<h2>출석체크</h2>
+<p><a href="http://localhost:8888/html/life/ilfe/chlil0301_m02.html">페이지</a></p>
+<pre class="prettyprint source lang-javascript"><code>// 기본 스탬프 찍기
+$('.today-stamp-wrap').data('ui').setDefault(2);    // 0~9
+
+// 현재 선택된 스탬프 기준으로 새 스탬프 찍기
+$('.today-stamp-wrap').data('ui').setNew();
+</code></pre>
+<h2>util: scrollTo</h2>
+<p>scrollTo 공통 해당 위치로 스크롤</p>
+<h3>params</h3>
+<ul>
+<li><strong>value {number | HTMLElement | selector | jQuery}</strong>
+<ul>
+<li>scroll할 숫자 또는 htmlElement 또는 셀렉터스트링 또는 jQuery</li>
+</ul>
+</li>
+<li><strong>withAnimation {boolean}</strong>
+<ul>
+<li>true : 기본: true, 애니메이션 여부</li>
+</ul>
+</li>
+<li><strong>withSticky {boolean}</strong>
+<ul>
+<li>기본: true, 해더등의 스티키 상황인지에 따라 top offset변경 됨</li>
+</ul>
+</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>  hkUI.scrollTo(100);
+  hkUI.scrollTo(document.getElementById('id');
+  hkUI.scrollTo('.some-class');
+  hkUI.scrollTo($('.some-class'));
+  hkUI.scrollTo($('.some-class'), false, true);
+</code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<h1>개발 전달사항 이외 가이드</h1>
+<h2>구조</h2>
+<pre><code>js/
+  + libs                          // 외부적으로 script src로 들어가는 라이브러리
+      jquery.js
+  + src
+      + components                // components
+        + base                    // 기본 상속 클래스
+          - Popup.js
+          - UI.js
+        + templates               // 요소를 그릴때 쓰는 template
+          - html.template.js
+        - Accordion.js
+        - DropdownSelect.js
+        - Expand.js
+        - HKSwiper.js
+        - index.js
+        - Input.js
+        - PopupAlert.js
+        - PopupDate.js
+        - PopupExternal.js
+        - PopupSelect.js
+        - Tab.js
+        - Tooltip.js
+      + functions               // components보다 단위가 작은 ui
+        - a11y.ui.js
+        - header.ui.js
+        - nudge.ui.js
+        - product.animation.js
+        - select.common.js
+        - simple.ui.js
+      +libs                     // library
+        + gsap
+          - DrawSVGPlugin.js
+          - GSDevTools.js
+          - MotionPathHelper.js
+        - datepicker-ko.js
+        - jquery.scrollbar.min.js
+        - jquery-ui.min.js
+        - swiper.min.5.4.5.js
+      + utils                   // util
+        - contants.js
+        - jquery.hook.js
+        - test.dev.js
+        - util.js
+      - common.ui.js
+      - common.ui.list.js
+      - main.ui.js
+</code></pre>
+<p><strong>src폴더 내에 들어있는 모든 파일든은 common.ui.js, common.libs.js, main.ui.js로 압축됩니다.</strong></p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a>
+	
+		on February 23rd 2022, 6:55:18 pm
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
